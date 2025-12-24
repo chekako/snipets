@@ -1,5 +1,7 @@
-import time
+import datetime
 import logging
+import time
+
 
 class AutoLog:
 	def __init__(self, log_level, enter_msg_lambda, exit_msg_lambda):
@@ -13,14 +15,14 @@ class AutoLog:
 
 	def __enter__(self) -> 'AutoLog':
 		# determine if should log and skip if not
-		self.ts = time.time()
-		print(f'about to log at {self.ts}: ', self.enter_msg())
+		self.ts = datetime.datetime.now()
+		print(f'about to log at {self.ts.strftime("%Y-%m-%d %H:%M:%S")}: ', self.enter_msg())
 		logging.log(self.log_level, self.enter_msg())
 		return self
 
 	def __exit__(self, exc_type, exc_value, traceback):
 		# only if enter determined that it should log; else skip
-		print(f'about to log elapsed {time.time() - self.ts}: ', self.exit_msg())
+		print(f'about to log elapsed {datetime.datetime.now() - self.ts}: ', self.exit_msg())
 		logging.log(self.log_level, self.exit_msg())
 
 
