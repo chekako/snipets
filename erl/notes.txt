@@ -1,0 +1,12 @@
+
+docker run -it --name my-erlang -v ~/projects/language/Erlang:/usr/src -w /usr/src/ erlang
+
+c(my_clt).
+c(my_srv).
+Fsrv=my_srv:start("."). % start erlang process in background, bind to Fsrv so it can be called and stopped
+my_clt:get_file(Fsrv,"qwerty"). % non-existing file will return {error,enoent}
+my_clt:get_file(Fsrv,"q.erl"). % valid file will return {ok,<<"beginning of file content"...>>}
+
+
+
+
