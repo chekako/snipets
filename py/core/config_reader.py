@@ -4,6 +4,8 @@ import os
 # MY Code
 from core import my_type_aliases
 
+__initialized__ = False
+
 
 class ConfigReader:
 	"""
@@ -13,7 +15,7 @@ class ConfigReader:
 	"""
 	#
 	instance = None
-	filepath = "backend_config.ini"
+	filepath = "config.ini"
 	# filepath = "backend_config.json"  # This file doesn't exist.
 
 	def __new__(cls):
@@ -22,6 +24,8 @@ class ConfigReader:
 			cls.instance = super(ConfigReader, cls).__new__(cls)
 			cls.instance.my_config = configparser.ConfigParser()  # Use this object to read + manipulate INI file
 			cls.instance.my_config.read(cls.filepath)  # read the INI file
+		global __initialized__
+		__initialized__ = True
 		return cls.instance
 
 	@classmethod
@@ -56,7 +60,6 @@ class ConfigReader:
 		""""""
 		return cls.get_section_or_default(section).getint(option=option, fallback=fallback)
 
-	# TODO: Use it or lose it.
 	@classmethod
 	def get_float(cls, section: str, option: str, fallback: float) -> float:
 		""""""

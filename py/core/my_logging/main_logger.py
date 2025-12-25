@@ -6,10 +6,14 @@ import os
 import sys
 import time
 import typing
+
+import Main
 # MY Code
 from core.config_reader import ConfigReader as CR
 from core.my_logging.helper import LoggingHelper
 from core.my_logging.custom_formatter import CustomFormatter
+
+__initialized__ = False
 
 
 class MainLogger(object):
@@ -20,6 +24,7 @@ class MainLogger(object):
 	"""
 	# utc_offset_pattern: str = r"^.+(?P<offset>[-+]\d{2}:\d{2})$"  # Regex also works.
 	instance = None
+	is_initialized = False
 	# Uvicorn loggers
 	uvicorn_access_logger: logging.Logger = None
 	uvicorn_error_logger: logging.Logger = None
@@ -55,7 +60,7 @@ class MainLogger(object):
 	# 	"default": "%Y-%m-%dT%H:%M:%S.%f"
 	# }
 
-	def __new__(cls):
+	def __new__(cls, init=False):
 		"""
 
 		NOTES (in no particular order):
@@ -64,6 +69,7 @@ class MainLogger(object):
 
 		"""
 		if cls.instance is None:
+#			s = Main.args.s 
 			instance: 'MainLogger' = super(MainLogger, cls).__new__(cls)
 			instance.logger = logging.getLogger(cls.main_logger_name)
 			instance.logger.setLevel(cls.default_log_level_main)
@@ -90,10 +96,12 @@ class MainLogger(object):
 				logging.getLogger("uvicorn.error"), cls.default_log_level_uvicorn,
 				file_handler, b_replace_file_handler
 			)
+			if init:
+				cls.instance.initialize()
 		return cls.instance
 
 	@classmethod
-	def post_new(cls):
+	def initialize(cls):
 		"""
 		Try reading from the configuration file.
 
@@ -107,9 +115,13 @@ class MainLogger(object):
 
 		:return:
 		"""
+		if cls.is_initialized:
+			print("already initialized.")
+			return
+		print("initializing...")
 		t_config: tuple[int, int, int, int, str, str, str] = MainLogger.get_configuration()
 		(i_level_main, i_level_uvicorn, i_level_file_handler, i_level_stream_handler,
-		 s_file_name, s_encoding, s_rollover_when) = t_config
+				s_file_name, s_encoding, s_rollover_when) = t_config
 
 		# Make sure new destination directory exists
 		cls.make_sure_log_dir_exists(s_file_name)
@@ -144,6 +156,10 @@ class MainLogger(object):
 		for message, caught_exception in cls.pending_errors_to_report.items():
 			cls.log_exception(message, caught_exception)
 		cls.pending_errors_to_report.clear()
+		print("initialized.")
+		cls.is_initialized = True
+		global __initialized__
+		__initialized__ = True
 
 	@classmethod
 	def make_sure_log_dir_exists(cls, s_path: str) -> None:

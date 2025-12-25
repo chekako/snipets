@@ -1,0 +1,50 @@
+2025-12-23T20:24:38.335543 - INFO MainLogger
+Local time is CST = UTC-6.0
+Logging level: DEBUG
+2025-12-23T20:24:38.335735 - INFO MainLogger
+howdy
+
+2025-12-23T20:24:38.335864 - ERROR MainLogger
+-0 ╔ work ⌜ start testing... ...
+2025-12-23T20:24:38.335958 - ERROR MainLogger
+-0 ╝ work ⌟ done; all done.. in 9.489059448242188e-05 s
+2025-12-23T20:24:52.336099 - INFO MainLogger
+Local time is CST = UTC-6.0
+Logging level: DEBUG
+2025-12-23T20:24:52.336281 - INFO MainLogger
+howdy
+
+2025-12-23T20:24:52.336416 - INFO MainLogger
+-0 ╔ work ⌜ start testing... ...
+2025-12-23T20:24:52.336519 - INFO MainLogger
+-0 ╝ work ⌟ done; all done.. in 9.799003601074219e-05 s
+2025-12-23T20:29:03.156132 - INFO MainLogger
+Local time is CST = UTC-6.0
+Logging level: DEBUG
+2025-12-23T20:29:03.156292 - INFO MainLogger
+howdy
+
+2025-12-23T20:29:03.156411 - INFO MainLogger
+-0 ╔ work ⌜ start testing... ...
+2025-12-23T20:29:03.156502 - INFO MainLogger
+-0 ╝ work ⌟ done; all done.. in 8.797645568847656e-05 s
+2025-12-23T20:44:00.889021 - INFO MainLogger
+Local time is CST = UTC-6.0
+Logging level: DEBUG
+2025-12-23T20:44:00.889247 - INFO MainLogger
+howdy
+
+2025-12-23T20:44:00.889377 - INFO MainLogger
+-0 ╔ work ⌜ start testing... ...
+2025-12-23T20:44:00.889475 - INFO MainLogger
+-0 ╝ work ⌟ done; all done.. in 9.799003601074219e-05 s
+2025-12-23T20:46:12.477518 - INFO MainLogger
+Local time is CST = UTC-6.0
+Logging level: DEBUG
+2025-12-23T20:46:12.477735 - INFO MainLogger
+howdy
+
+2025-12-23T20:46:12.477858 - INFO MainLogger
+-0 ╔ work ⌜ start testing... ...
+2025-12-23T20:46:12.477952 - INFO MainLogger
+-0 ╝ work ⌟ done; all done.. in 9.298324584960938e-05 s
